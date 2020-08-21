@@ -23,7 +23,7 @@ function createWindow() {
         // Use this in development mode.
         icon: isDev() ? path.join(process.cwd(), 'public/favicon.png') : path.join(__dirname, 'public/favicon.png'),
         // Use this in production mode.
-        // icon: path.join(__dirname, 'public/icons/icon-512x512.png'),
+        // icon: path.join(__dirname, 'public/favicon.png'),
         show: false
     });
 
