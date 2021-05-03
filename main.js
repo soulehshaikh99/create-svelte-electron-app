@@ -18,7 +18,9 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            // enableRemoteModule: true,
+            // contextIsolation: false
         },
         // Use this in development mode.
         icon: isDev() ? path.join(process.cwd(), 'public/favicon.png') : path.join(__dirname, 'public/favicon.png'),

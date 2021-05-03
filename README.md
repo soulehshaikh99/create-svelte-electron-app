@@ -84,14 +84,15 @@ $ cd create-svelte-electron-app
 # It should look something like this
 "dependencies": {},
 "devDependencies": {
-  "@rollup/plugin-commonjs": "^14.0.0",
-  "@rollup/plugin-node-resolve": "^8.0.0",
+  "@rollup/plugin-commonjs": "^17.0.0",
+  "@rollup/plugin-node-resolve": "^11.0.0",
   "rollup": "^2.3.4",
-  "rollup-plugin-livereload": "^1.0.0",
-  "rollup-plugin-svelte": "^5.0.3",
-  "rollup-plugin-terser": "^6.0.0",
+  "rollup-plugin-css-only": "^3.1.0",
+  "rollup-plugin-livereload": "^2.0.0",
+  "rollup-plugin-svelte": "^7.0.0",
+  "rollup-plugin-terser": "^7.0.0",
   "sirv-cli": "^1.0.0",
-  "svelte": "^3.0.0"
+  "svelte": "^3.0.0",
 }
 ```
 
@@ -118,21 +119,22 @@ $ yarn add electron-serve # or npm i electron-serve
 
 ```json
 "dependencies": {
-  "electron-serve": "^1.0.0"
+  "electron-serve": "^1.1.0"
 },
 "devDependencies": {
-  "@rollup/plugin-commonjs": "^14.0.0",
-  "@rollup/plugin-node-resolve": "^8.0.0",
-  "concurrently": "^5.3.0",
-  "electron": "^9.2.1",
-  "electron-builder": "^22.8.0",
+  "@rollup/plugin-commonjs": "^17.0.0",
+  "@rollup/plugin-node-resolve": "^11.0.0",
+  "concurrently": "^6.0.2",
+  "electron": "^12.0.6",
+  "electron-builder": "^22.10.5",
   "rollup": "^2.3.4",
-  "rollup-plugin-livereload": "^1.0.0",
-  "rollup-plugin-svelte": "^5.0.3",
-  "rollup-plugin-terser": "^6.0.0",
+  "rollup-plugin-css-only": "^3.1.0",
+  "rollup-plugin-livereload": "^2.0.0",
+  "rollup-plugin-svelte": "^7.0.0",
+  "rollup-plugin-terser": "^7.0.0",
   "sirv-cli": "^1.0.0",
   "svelte": "^3.0.0",
-  "wait-on": "^5.2.0"
+  "wait-on": "^5.3.0"
 }
 ```
 
@@ -174,7 +176,9 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            // enableRemoteModule: true,
+            // contextIsolation: false
         },
         // Use this in development mode.
         icon: isDev() ? path.join(process.cwd(), 'public/favicon.png') : path.join(__dirname, 'public/favicon.png'),
@@ -247,7 +251,7 @@ app.on('activate', function () {
 "scripts": {
   "build": "rollup -c",
   "dev": "rollup -c -w",
-  "start": "sirv public",
+  "start": "sirv public --no-clear",
   "electron": "wait-on http://localhost:5000 && electron .",
   "electron-dev": "concurrently \"yarn run dev\" \"yarn run electron\"",
   "preelectron-pack": "yarn run build",
