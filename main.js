@@ -13,19 +13,28 @@ function isDev() {
 }
 
 function createWindow() {
+    // declare variables which hold file location to preload.js file and application's icon.
+    let preloadJS, appIcon;
+    
+    if(isDev()) {
+        preloadJS = path.join(__dirname, 'preload.js');
+        appIcon = path.join(__dirname, 'public/favicon.png');
+    } else {
+        preloadJS = path.join(process.cwd(), 'resources/preload.js')
+        appIcon = path.join(__dirname, 'public/favicon.png');
+    }
+    
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
             nodeIntegration: true,
+            preload: preloadJS,
             // enableRemoteModule: true,
             // contextIsolation: false
         },
-        // Use this in development mode.
-        icon: isDev() ? path.join(process.cwd(), 'public/favicon.png') : path.join(__dirname, 'public/favicon.png'),
-        // Use this in production mode.
-        // icon: path.join(__dirname, 'public/favicon.png'),
+        icon: appIcon,
         show: false
     });
 
