@@ -169,17 +169,25 @@ function isDev() {
 }
 
 function createWindow() {
+    // declare variables which hold file location to preload.js file and application's icon.
+    let appIcon;
+    
+    if(isDev()) {
+        appIcon = path.join(__dirname, 'public/favicon.png');
+    } else {
+        appIcon = path.join(__dirname, 'public/favicon.png');
+    }
+    
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            // enableRemoteModule: true,
+            // contextIsolation: false
         },
-        // Use this in development mode.
-        icon: isDev() ? path.join(process.cwd(), 'public/favicon.png') : path.join(__dirname, 'public/favicon.png'),
-        // Use this in production mode.
-        // icon: path.join(__dirname, 'public/favicon.png'),
+        icon: appIcon,
         show: false
     });
 
@@ -283,6 +291,71 @@ $ yarn electron-dev # or npm run electron-dev
 
 # Package Your App
 $ yarn electron-pack # or npm run electron-pack
+```
+
+## Steps to integrate preload.js script
+
+#### 1) Create preload.js file
+
+```bash
+# Windows Users
+$ fsutil file createnew preload.js 0
+# notepad main.js 
+
+# Linux and macOS Users
+$ touch preload.js
+```
+
+#### 2) Paste placeholder code in preload.js file
+
+```js
+console.log('Hello from preload.js file!');
+```
+
+#### 3) Update main.js file
+
+```js
+// declare variables which hold file location to preload.js file and application's icon.
+let preloadJS, appIcon;
+
+if(isDev()) {
+    preloadJS = path.join(__dirname, 'preload.js');
+    appIcon = path.join(__dirname, 'public/favicon.png');
+} else {
+    preloadJS = path.join(process.cwd(), 'resources/preload.js')
+    appIcon = path.join(__dirname, 'public/favicon.png');
+}
+
+// Create the browser window.
+mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+        nodeIntegration: true,
+        preload: preloadJS,
+        // enableRemoteModule: true,
+        // contextIsolation: false
+    },
+    icon: appIcon,
+    show: false
+});
+```
+
+#### 4) Update package.json file
+
+```json
+"build": {
+  "icon": "public/favicon.png",
+  "productName": "Svelte and Electron App",
+  "files": [
+    "public/**/*",
+    "main.js"
+  ],
+  "extraResources": ["preload.js"],
+  "win": {},
+  "linux": {},
+  "mac": {}
+}
 ```
 
 ### 💯 Result
