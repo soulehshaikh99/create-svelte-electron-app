@@ -258,7 +258,7 @@ app.on("activate", function () {
 "scripts": {
   "build": "rollup -c",
   "dev": "rollup -c -w",
-  "start": "sirv public",
+  "start": "sirv public --no-clear",
   "electron": "wait-on http://localhost:5000 && electron .",
   "electron-dev": "concurrently \"yarn run dev\" \"yarn run electron\"",
   "preelectron-pack": "yarn run build",
