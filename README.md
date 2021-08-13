@@ -70,7 +70,7 @@ $ yarn electron-pack # or npm run electron-pack
 
 ```bash
 $ npx degit sveltejs/template create-svelte-electron-app
-``` 
+```
 
 #### 2) Switch to project directory
 
@@ -82,23 +82,25 @@ $ cd create-svelte-electron-app
 
 ```bash
 # It should look something like this
-"dependencies": {},
+"dependencies": {}
 "devDependencies": {
-  "@rollup/plugin-commonjs": "^14.0.0",
-  "@rollup/plugin-node-resolve": "^8.0.0",
+  "@rollup/plugin-commonjs": "^17.0.0",
+  "@rollup/plugin-node-resolve": "^11.0.0",
   "rollup": "^2.3.4",
-  "rollup-plugin-livereload": "^1.0.0",
-  "rollup-plugin-svelte": "^5.0.3",
-  "rollup-plugin-terser": "^6.0.0",
-  "sirv-cli": "^1.0.0",
+  "rollup-plugin-css-only": "^3.1.0",
+  "rollup-plugin-livereload": "^2.0.0",
+  "rollup-plugin-svelte": "^7.0.0",
+  "rollup-plugin-terser": "^7.0.0",
+  "sirv-cli": "^1.0.0"
   "svelte": "^3.0.0"
 }
 ```
 
-#### 4) Install Dependencies
+#### 4) Install & Update all Dependencies at the same time
 
 ```bash
-$ yarn # or npm install
+$ yarn add --dev @rollup/plugin-commonjs@latest @rollup/plugin-node-resolve@latest rollup@latest rollup-plugin-css-only@latest rollup-plugin-livereload@latest rollup-plugin-svelte@latest rollup-plugin-terser@latest sirv-cli@latest svelte@latest
+# npm i -D @rollup/plugin-commonjs@latest @rollup/plugin-node-resolve@latest rollup@latest rollup-plugin-css-only@latest rollup-plugin-livereload@latest rollup-plugin-svelte@latest rollup-plugin-terser@latest sirv-cli@latest svelte@latest
 ```
 
 #### 5) Install Development Dependencies
@@ -118,21 +120,22 @@ $ yarn add electron-serve # or npm i electron-serve
 
 ```json
 "dependencies": {
-  "electron-serve": "^1.0.0"
+  "electron-serve": "^1.1.0"
 },
 "devDependencies": {
-  "@rollup/plugin-commonjs": "^14.0.0",
-  "@rollup/plugin-node-resolve": "^8.0.0",
-  "concurrently": "^5.3.0",
-  "electron": "^9.2.1",
-  "electron-builder": "^22.8.0",
-  "rollup": "^2.3.4",
-  "rollup-plugin-livereload": "^1.0.0",
-  "rollup-plugin-svelte": "^5.0.3",
-  "rollup-plugin-terser": "^6.0.0",
-  "sirv-cli": "^1.0.0",
-  "svelte": "^3.0.0",
-  "wait-on": "^5.2.0"
+  "@rollup/plugin-commonjs": "^20.0.0",
+  "@rollup/plugin-node-resolve": "^13.0.4",
+  "concurrently": "^6.2.1",
+  "electron": "^13.1.9",
+  "electron-builder": "^22.11.7",
+  "rollup": "^2.56.2",
+  "rollup-plugin-css-only": "^3.1.0",
+  "rollup-plugin-livereload": "^2.0.5",
+  "rollup-plugin-svelte": "^7.1.0",
+  "rollup-plugin-terser": "^7.0.2",
+  "sirv-cli": "^1.0.12",
+  "svelte": "^3.42.1",
+  "wait-on": "^6.0.0"
 }
 ```
 
@@ -145,7 +148,7 @@ $ yarn add electron-serve # or npm i electron-serve
 ```bash
 # Windows Users
 $ fsutil file createnew main.js 0
-# notepad main.js 
+# notepad main.js
 
 # Linux and macOS Users
 $ touch main.js
@@ -155,88 +158,88 @@ $ touch main.js
 
 ```js
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, dialog } = require('electron');
-const path = require('path');
-const serve = require('electron-serve');
-const loadURL = serve({ directory: 'public' });
+const { app, BrowserWindow, dialog } = require("electron");
+const path = require("path");
+const serve = require("electron-serve");
+const loadURL = serve({ directory: "public" });
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
 function isDev() {
-    return !app.isPackaged;
+  return !app.isPackaged;
 }
 
 function createWindow() {
-    // declare variables which hold file location to preload.js file and application's icon.
-    let appIcon;
-    
-    if(isDev()) {
-        appIcon = path.join(__dirname, 'public/favicon.png');
-    } else {
-        appIcon = path.join(__dirname, 'public/favicon.png');
-    }
-    
-    // Create the browser window.
-    mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: true,
-            // enableRemoteModule: true,
-            // contextIsolation: false
-        },
-        icon: appIcon,
-        show: false
-    });
+  // declare variables which hold file location to preload.js file and application's icon.
+  let appIcon;
 
-    // This block of code is intended for development purpose only.
-    // Delete this entire block of code when you are ready to package the application.
-    if (isDev()) {
-        mainWindow.loadURL('http://localhost:5000/');
-    } else {
-        loadURL(mainWindow);
-    }
-    
-    // Uncomment the following line of code when app is ready to be packaged.
-    // loadURL(mainWindow);
+  if (isDev()) {
+    appIcon = path.join(__dirname, "public/favicon.png");
+  } else {
+    appIcon = path.join(__dirname, "public/favicon.png");
+  }
 
-    // Open the DevTools and also disable Electron Security Warning.
-    // process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
-    // mainWindow.webContents.openDevTools();
+  // Create the browser window.
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      // enableRemoteModule: true,
+      // contextIsolation: false
+    },
+    icon: appIcon,
+    show: false,
+  });
 
-    // Emitted when the window is closed.
-    mainWindow.on('closed', function () {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        mainWindow = null
-    });
+  // This block of code is intended for development purpose only.
+  // Delete this entire block of code when you are ready to package the application.
+  if (isDev()) {
+    mainWindow.loadURL("http://localhost:5000/");
+  } else {
+    loadURL(mainWindow);
+  }
 
-    // Emitted when the window is ready to be shown
-    // This helps in showing the window gracefully.
-    mainWindow.once('ready-to-show', () => {
-        mainWindow.show()
-    });
+  // Uncomment the following line of code when app is ready to be packaged.
+  // loadURL(mainWindow);
+
+  // Open the DevTools and also disable Electron Security Warning.
+  // process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
+  // mainWindow.webContents.openDevTools();
+
+  // Emitted when the window is closed.
+  mainWindow.on("closed", function () {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    mainWindow = null;
+  });
+
+  // Emitted when the window is ready to be shown
+  // This helps in showing the window gracefully.
+  mainWindow.once("ready-to-show", () => {
+    mainWindow.show();
+  });
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on("ready", createWindow);
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () {
-    // On macOS it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
-    if (process.platform !== 'darwin') app.quit()
+app.on("window-all-closed", function () {
+  // On macOS it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform !== "darwin") app.quit();
 });
 
-app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (mainWindow === null) createWindow()
+app.on("activate", function () {
+  // On macOS it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (mainWindow === null) createWindow();
 });
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
@@ -269,7 +272,7 @@ app.on('activate', function () {
 
 ```bash
 "name": "create-svelte-electron-app",   # By default it is svelte-app
-"main": "main.js",  # Application Entry Point, please verify entry point is set to main.js 
+"main": "main.js",  # Application Entry Point, please verify entry point is set to main.js
 "build": {
   "icon": "public/favicon.png",
   "productName": "Svelte and Electron App",
@@ -300,7 +303,7 @@ $ yarn electron-pack # or npm run electron-pack
 ```bash
 # Windows Users
 $ fsutil file createnew preload.js 0
-# notepad main.js 
+# notepad main.js
 
 # Linux and macOS Users
 $ touch preload.js
@@ -309,7 +312,7 @@ $ touch preload.js
 #### 2) Paste placeholder code in preload.js file
 
 ```js
-console.log('Hello from preload.js file!');
+console.log("Hello from preload.js file!");
 ```
 
 #### 3) Update main.js file
@@ -318,26 +321,26 @@ console.log('Hello from preload.js file!');
 // declare variables which hold file location to preload.js file and application's icon.
 let preloadJS, appIcon;
 
-if(isDev()) {
-    preloadJS = path.join(__dirname, 'preload.js');
-    appIcon = path.join(__dirname, 'public/favicon.png');
+if (isDev()) {
+  preloadJS = path.join(__dirname, "preload.js");
+  appIcon = path.join(__dirname, "public/favicon.png");
 } else {
-    preloadJS = path.join(process.cwd(), 'resources/preload.js')
-    appIcon = path.join(__dirname, 'public/favicon.png');
+  preloadJS = path.join(process.cwd(), "resources/preload.js");
+  appIcon = path.join(__dirname, "public/favicon.png");
 }
 
 // Create the browser window.
 mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-        nodeIntegration: true,
-        preload: preloadJS,
-        // enableRemoteModule: true,
-        // contextIsolation: false
-    },
-    icon: appIcon,
-    show: false
+  width: 800,
+  height: 600,
+  webPreferences: {
+    nodeIntegration: true,
+    preload: preloadJS,
+    // enableRemoteModule: true,
+    // contextIsolation: false
+  },
+  icon: appIcon,
+  show: false,
 });
 ```
 
