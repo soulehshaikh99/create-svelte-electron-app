@@ -8,9 +8,7 @@
     "productName": "Svelte and Electron App",
     "files": [
       "public/**/*",
-      "main.js"
-    ],
-    "extraResources": [
+      "main.js",
       "preload.js"
     ],
     "win": {},

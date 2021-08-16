@@ -12,29 +12,18 @@ function isDev() {
     return !app.isPackaged;
 }
 
-function createWindow() {
-    // declare variables which hold file location to preload.js file and application's icon.
-    let preloadJS, appIcon;
-    
-    if(isDev()) {
-        preloadJS = path.join(__dirname, 'preload.js');
-        appIcon = path.join(__dirname, 'public/favicon.png');
-    } else {
-        preloadJS = path.join(process.cwd(), 'resources/preload.js')
-        appIcon = path.join(__dirname, 'public/favicon.png');
-    }
-    
+function createWindow() {    
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
             nodeIntegration: true,
-            preload: preloadJS,
+            preload: path.join(__dirname, 'preload.js'),
             // enableRemoteModule: true,
             // contextIsolation: false
         },
-        icon: appIcon,
+        icon: path.join(__dirname, 'public/favicon.png'),
         show: false
     });
 

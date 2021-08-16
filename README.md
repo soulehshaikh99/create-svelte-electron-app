@@ -158,94 +158,103 @@ $ touch main.js
 
 ```js
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, dialog } = require("electron");
-const path = require("path");
-const serve = require("electron-serve");
-const loadURL = serve({ directory: "public" });
+const { app, BrowserWindow, dialog } = require('electron');
+const path = require('path');
+const serve = require('electron-serve');
+const loadURL = serve({ directory: 'public' });
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
 function isDev() {
-  return !app.isPackaged;
+    return !app.isPackaged;
 }
 
-function createWindow() {
-  // declare variables which hold file location to preload.js file and application's icon.
-  let appIcon;
+function createWindow() {    
+    // Create the browser window.
+    mainWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true,
+            preload: path.join(__dirname, 'preload.js'),
+            // enableRemoteModule: true,
+            // contextIsolation: false
+        },
+        icon: path.join(__dirname, 'public/favicon.png'),
+        show: false
+    });
 
-  if (isDev()) {
-    appIcon = path.join(__dirname, "public/favicon.png");
-  } else {
-    appIcon = path.join(__dirname, "public/favicon.png");
-  }
+    // This block of code is intended for development purpose only.
+    // Delete this entire block of code when you are ready to package the application.
+    if (isDev()) {
+        mainWindow.loadURL('http://localhost:5000/');
+    } else {
+        loadURL(mainWindow);
+    }
+    
+    // Uncomment the following line of code when app is ready to be packaged.
+    // loadURL(mainWindow);
 
-  // Create the browser window.
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true,
-      // enableRemoteModule: true,
-      // contextIsolation: false
-    },
-    icon: appIcon,
-    show: false,
-  });
+    // Open the DevTools and also disable Electron Security Warning.
+    // process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
+    // mainWindow.webContents.openDevTools();
 
-  // This block of code is intended for development purpose only.
-  // Delete this entire block of code when you are ready to package the application.
-  if (isDev()) {
-    mainWindow.loadURL("http://localhost:5000/");
-  } else {
-    loadURL(mainWindow);
-  }
+    // Emitted when the window is closed.
+    mainWindow.on('closed', function () {
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        mainWindow = null
+    });
 
-  // Uncomment the following line of code when app is ready to be packaged.
-  // loadURL(mainWindow);
-
-  // Open the DevTools and also disable Electron Security Warning.
-  // process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
-  // mainWindow.webContents.openDevTools();
-
-  // Emitted when the window is closed.
-  mainWindow.on("closed", function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null;
-  });
-
-  // Emitted when the window is ready to be shown
-  // This helps in showing the window gracefully.
-  mainWindow.once("ready-to-show", () => {
-    mainWindow.show();
-  });
+    // Emitted when the window is ready to be shown
+    // This helps in showing the window gracefully.
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show()
+    });
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", createWindow);
+app.on('ready', createWindow);
 
 // Quit when all windows are closed.
-app.on("window-all-closed", function () {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== "darwin") app.quit();
+app.on('window-all-closed', function () {
+    // On macOS it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
+    if (process.platform !== 'darwin') app.quit()
 });
 
-app.on("activate", function () {
-  // On macOS it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) createWindow();
+app.on('activate', function () {
+    // On macOS it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (mainWindow === null) createWindow()
 });
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 ```
 
-#### 11) Update the script section of `package.json`
+#### 11) Create main.js file (serves as entry point for Electron App's Main Process)
+
+```bash
+# Windows Users
+$ fsutil file createnew preload.js 0
+# notepad preload.js
+
+# Linux and macOS Users
+$ touch preload.js
+```
+
+#### 12) Paste the below code in preload.js file
+
+```js
+console.log('Hello from preload.js file!');
+```
+
+#### 13) Update the script section of `package.json`
 
 ```bash
 # Add this scripts
@@ -266,7 +275,7 @@ app.on("activate", function () {
 }
 ```
 
-#### 12) Add the following configuration in `package.json`
+#### 14) Add the following configuration in `package.json`
 
 **Note:** build configuration is used by electron-builder, modify it if you wish to add more packaging and native distribution options for different OS Platforms.
 
@@ -286,7 +295,7 @@ app.on("activate", function () {
 }
 ```
 
-#### 14) Test drive your app
+#### 15) Test drive your app
 
 ```bash
 # Run your app
@@ -294,71 +303,6 @@ $ yarn electron-dev # or npm run electron-dev
 
 # Package Your App
 $ yarn electron-pack # or npm run electron-pack
-```
-
-## Steps to integrate preload.js script
-
-#### 1) Create preload.js file
-
-```bash
-# Windows Users
-$ fsutil file createnew preload.js 0
-# notepad main.js
-
-# Linux and macOS Users
-$ touch preload.js
-```
-
-#### 2) Paste placeholder code in preload.js file
-
-```js
-console.log("Hello from preload.js file!");
-```
-
-#### 3) Update main.js file
-
-```js
-// declare variables which hold file location to preload.js file and application's icon.
-let preloadJS, appIcon;
-
-if (isDev()) {
-  preloadJS = path.join(__dirname, "preload.js");
-  appIcon = path.join(__dirname, "public/favicon.png");
-} else {
-  preloadJS = path.join(process.cwd(), "resources/preload.js");
-  appIcon = path.join(__dirname, "public/favicon.png");
-}
-
-// Create the browser window.
-mainWindow = new BrowserWindow({
-  width: 800,
-  height: 600,
-  webPreferences: {
-    nodeIntegration: true,
-    preload: preloadJS,
-    // enableRemoteModule: true,
-    // contextIsolation: false
-  },
-  icon: appIcon,
-  show: false,
-});
-```
-
-#### 4) Update package.json file
-
-```json
-"build": {
-  "icon": "public/favicon.png",
-  "productName": "Svelte and Electron App",
-  "files": [
-    "public/**/*",
-    "main.js"
-  ],
-  "extraResources": ["preload.js"],
-  "win": {},
-  "linux": {},
-  "mac": {}
-}
 ```
 
 ### 💯 Result
