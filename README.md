@@ -84,15 +84,15 @@ $ cd create-svelte-electron-app
 # It should look something like this
 "dependencies": {}
 "devDependencies": {
-  "@rollup/plugin-commonjs": "^17.0.0",
-  "@rollup/plugin-node-resolve": "^11.0.0",
-  "rollup": "^2.3.4",
-  "rollup-plugin-css-only": "^3.1.0",
-  "rollup-plugin-livereload": "^2.0.0",
-  "rollup-plugin-svelte": "^7.0.0",
-  "rollup-plugin-terser": "^7.0.0",
-  "sirv-cli": "^1.0.0"
-  "svelte": "^3.0.0"
+  "@rollup/plugin-commonjs": "^23.0.2",
+  "@rollup/plugin-node-resolve": "^15.0.1",
+  "rollup": "^3.2.3",
+  "rollup-plugin-css-only": "^4.2.0",
+  "rollup-plugin-livereload": "^2.0.5",
+  "rollup-plugin-svelte": "^7.1.0",
+  "rollup-plugin-terser": "^7.0.2",
+  "sirv-cli": "^2.0.2"
+  "svelte": "^3.52.0"
 }
 ```
 
@@ -123,19 +123,19 @@ $ yarn add electron-serve # or npm i electron-serve
   "electron-serve": "^1.1.0"
 },
 "devDependencies": {
-  "@rollup/plugin-commonjs": "^20.0.0",
-  "@rollup/plugin-node-resolve": "^13.0.4",
-  "concurrently": "^6.2.1",
-  "electron": "^13.1.9",
-  "electron-builder": "^22.11.7",
-  "rollup": "^2.56.2",
-  "rollup-plugin-css-only": "^3.1.0",
+  "@rollup/plugin-commonjs": "^23.0.2",
+  "@rollup/plugin-node-resolve": "^15.0.1",
+  "concurrently": "^7.5.0",
+  "electron": "^21.2.0",
+  "electron-builder": "^23.6.0",
+  "rollup": "^3.2.3",
+  "rollup-plugin-css-only": "^4.2.0",
   "rollup-plugin-livereload": "^2.0.5",
   "rollup-plugin-svelte": "^7.1.0",
   "rollup-plugin-terser": "^7.0.2",
-  "sirv-cli": "^1.0.12",
-  "svelte": "^3.42.1",
-  "wait-on": "^6.0.0"
+  "sirv-cli": "^2.0.2",
+  "svelte": "^3.52.0",
+  "wait-on": "^6.0.1"
 }
 ```
 
@@ -158,7 +158,7 @@ $ touch main.js
 
 ```js
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, dialog } = require('electron');
+const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const serve = require('electron-serve');
 const loadURL = serve({ directory: 'public' });
@@ -189,7 +189,7 @@ function createWindow() {
     // This block of code is intended for development purpose only.
     // Delete this entire block of code when you are ready to package the application.
     if (isDev()) {
-        mainWindow.loadURL('http://localhost:5000/');
+        mainWindow.loadURL('http://localhost:8080/');
     } else {
         loadURL(mainWindow);
     }
@@ -237,7 +237,7 @@ app.on('activate', function () {
 // code. You can also put them in separate files and require them here.
 ```
 
-#### 11) Create main.js file (serves as entry point for Electron App's Main Process)
+#### 11) Create preload.js file (optional, contains code that runs before your web page is loaded into the browser window)
 
 ```bash
 # Windows Users
@@ -258,17 +258,21 @@ console.log('Hello from preload.js file!');
 
 ```bash
 # Add this scripts
-"electron": "wait-on http://localhost:5000 && electron .",
+"electron": "wait-on http://localhost:8080 && electron .",
 "electron-dev": "concurrently \"yarn run dev\" \"yarn run electron\"",
 "preelectron-pack": "yarn run build",
 "electron-pack": "electron-builder"
 
+# Modify the build and dev scriptsW
+"build": "rollup -c --bundleConfigAsCjs",
+"dev": "rollup -c -w --bundleConfigAsCjs",
+
 # You should end up with something similar
 "scripts": {
-  "build": "rollup -c",
-  "dev": "rollup -c -w",
+  "build": "rollup -c --bundleConfigAsCjs",
+  "dev": "rollup -c -w --bundleConfigAsCjs",
   "start": "sirv public --no-clear",
-  "electron": "wait-on http://localhost:5000 && electron .",
+  "electron": "wait-on http://localhost:8080 && electron .",
   "electron-dev": "concurrently \"yarn run dev\" \"yarn run electron\"",
   "preelectron-pack": "yarn run build",
   "electron-pack": "electron-builder"
