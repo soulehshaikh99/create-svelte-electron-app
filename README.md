@@ -82,17 +82,17 @@ $ cd create-svelte-electron-app
 
 ```bash
 # It should look something like this
-"dependencies": {}
+"dependencies": {},
 "devDependencies": {
-  "@rollup/plugin-commonjs": "^23.0.2",
-  "@rollup/plugin-node-resolve": "^15.0.1",
-  "rollup": "^3.2.3",
-  "rollup-plugin-css-only": "^4.2.0",
-  "rollup-plugin-livereload": "^2.0.5",
-  "rollup-plugin-svelte": "^7.1.0",
-  "rollup-plugin-terser": "^7.0.2",
-  "sirv-cli": "^2.0.2"
-  "svelte": "^3.52.0"
+  "@rollup/plugin-commonjs": "^17.0.0",
+  "@rollup/plugin-node-resolve": "^11.0.0",
+  "rollup": "^2.3.4",
+  "rollup-plugin-css-only": "^3.1.0",
+  "rollup-plugin-livereload": "^2.0.0",
+  "rollup-plugin-svelte": "^7.0.0",
+  "rollup-plugin-terser": "^7.0.0",
+  "sirv-cli": "^2.0.0",
+  "svelte": "^3.0.0"
 }
 ```
 
