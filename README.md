@@ -13,11 +13,11 @@ The boilerplate code to get started creating Cross-platform Desktop Apps with El
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
-<a href="https://gitHub.com/soulehshaikh99/create-svelte-electron-app/stargazers/"><img src="https://camo.githubusercontent.com/a6424a69e264c0934d5350b72d3439e5c4816e9f7babb74f00816260e5a1b66d/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73746172732f626b6b6f7468617269323235352f50726f6772616d6d696e675f496e5f4a6176615f4e5054454c2e7376673f7374796c653d736f6369616c266c6162656c3d53746172266d61784167653d32353932303030" alt="GitHub stars" data-canonical-src="https://img.shields.io/github/stars/soulehshaikh99/create-svelte-electron-app.svg?style=social&amp;label=Star&amp;maxAge=2592000" style="max-width: 100%;"></a>
+<a href="https://gitHub.com/soulehshaikh99/create-svelte-electron-app/stargazers/"><img src="https://img.shields.io/github/stars/soulehshaikh99/create-svelte-electron-app.svg?style=social&amp;label=Star&amp;maxAge=2592000" alt="GitHub stars" style="max-width: 100%;"></a>
 
-<a href="https://gitHub.com/soulehshaikh99/create-svelte-electron-app/network/"><img src="https://camo.githubusercontent.com/00bd961199e1902f606397404f7fe7337ddb585d18f5678e8651f8ebac08fa05/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f666f726b732f626b6b6f7468617269323235352f50726f6772616d6d696e675f496e5f4a6176615f4e5054454c2e7376673f7374796c653d736f6369616c266c6162656c3d466f726b266d61784167653d32353932303030" alt="GitHub forks" data-canonical-src="https://img.shields.io/github/stars/soulehshaikh99/create-svelte-electron-app.svg?style=social&amp;label=Fork&amp;maxAge=2592000" style="max-width: 100%;"></a>
+<a href="https://gitHub.com/soulehshaikh99/create-svelte-electron-app/network/"><img src="https://img.shields.io/github/stars/soulehshaikh99/create-svelte-electron-app.svg?style=social&amp;label=Fork&amp;maxAge=2592000" alt="GitHub forks" style="max-width: 100%;"></a>
 
-<a href="https://gitHub.com/soulehshaikh99/create-svelte-electron-app/watchers/"><img src="https://camo.githubusercontent.com/0f186c9822b8d9413062629e8d998e16ff70b15f060cd2b29dd83faf2b833699/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f77617463686572732f626b6b6f7468617269323235352f50726f6772616d6d696e675f496e5f4a6176615f4e5054454c2e7376673f7374796c653d736f6369616c266c6162656c3d5761746368266d61784167653d32353932303030" alt="GitHub watchers" data-canonical-src="https://img.shields.io/github/stars/soulehshaikh99/create-svelte-electron-app.svg?style=social&amp;label=Watch&amp;maxAge=2592000" style="max-width: 100%;"></a>
+<a href="https://gitHub.com/soulehshaikh99/create-svelte-electron-app/watchers/"><img src="https://img.shields.io/github/stars/soulehshaikh99/create-svelte-electron-app.svg?style=social&amp;label=Watch&amp;maxAge=2592000" alt="GitHub watchers" style="max-width: 100%;"></a>
 
 </div>
 
