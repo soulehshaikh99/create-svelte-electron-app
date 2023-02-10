@@ -23,8 +23,8 @@
     "dev": "rollup -c -w --bundleConfigAsCjs",
     "start": "sirv public --no-clear",
     "electron": "wait-on http://localhost:8080 && electron .",
-    "electron-dev": "concurrently \"yarn run dev\" \"yarn run electron\"",
-    "preelectron-pack": "yarn run build",
+    "electron-dev": "concurrently \"rollup -c -w --bundleConfigAsCjs\" \"wait-on http://localhost:8080 && electron .\"",
+    "preelectron-pack": "rollup -c --bundleConfigAsCjs",
     "electron-pack": "electron-builder"
   },
   "dependencies": {

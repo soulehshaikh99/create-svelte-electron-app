@@ -40,7 +40,6 @@ The aim of this project is to provide Web Developers using `svelte` the power to
 
 ## 🚀 Getting Started
 
-**Note:** If you wish to use npm over yarn then modify `package.json` by replacing `yarn` with `npm` in `electron-dev` and `preelectron-pack` scripts.
 But I strongly recommend using <em>yarn</em> as it is a better choice when compared to <em>npm</em>.
 
 ### 🤓 Use this boilerplate
@@ -175,7 +174,7 @@ function isDev() {
     return !app.isPackaged;
 }
 
-function createWindow() {    
+function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 800,
@@ -197,7 +196,7 @@ function createWindow() {
     } else {
         loadURL(mainWindow);
     }
-    
+
     // Uncomment the following line of code when app is ready to be packaged.
     // loadURL(mainWindow);
 
