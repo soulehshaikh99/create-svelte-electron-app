@@ -39,7 +39,7 @@ The aim of this project is to provide Web Developers using `svelte` the power to
 <br />
 
 ## 🚀 Getting Started
-
+You may use `yarn`, or `npm`, or `pnpm` in the following.
 But I strongly recommend using <em>yarn</em> as it is a better choice when compared to <em>npm</em>.
 
 ### 🤓 Use this boilerplate
