@@ -16,6 +16,9 @@ The boilerplate code to get started creating Cross-platform Desktop Apps with El
 <div>
 <a href="https://gitHub.com/soulehshaikh99/create-svelte-electron-app/stargazers/"><img src="https://img.shields.io/github/stars/soulehshaikh99/create-svelte-electron-app.svg?style=social&amp;label=Star&amp;maxAge=2592000" alt="GitHub stars" style="max-width: 100%;"></a>&nbsp;&nbsp;&nbsp;<a href="https://gitHub.com/soulehshaikh99/create-svelte-electron-app/network/"><img src="https://img.shields.io/github/forks/soulehshaikh99/create-svelte-electron-app.svg?style=social&amp;label=Forks&amp;maxAge=2592000" alt="GitHub forks" style="max-width: 100%;"></a>&nbsp;&nbsp;&nbsp;<a href="https://gitHub.com/soulehshaikh99/create-svelte-electron-app/watchers/"><img src="https://img.shields.io/github/watchers/soulehshaikh99/create-svelte-electron-app.svg?style=social&amp;label=Watching&amp;maxAge=2592000" alt="GitHub watchers" style="max-width: 100%;"></a>
 </div>
+<br />
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/souleh99)
 
 </div>
 
@@ -322,6 +325,11 @@ $ yarn electron-pack # or npm run electron-pack
 <h3>😍 Made with ❤️ from Souleh</h3>
 
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
+<br/>
+
+<h3>💰 Support Me</h3>
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/souleh99)
 <br/>
 
 <h3>📋 License: </h3>
